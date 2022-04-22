@@ -16,6 +16,7 @@ class AuthGate extends StatelessWidget {
         if (!snapshot.hasData) {
           return SignInScreen(
             showAuthActionSwitch: false,
+            resizeToAvoidBottomInset: true,
             // Header content
             headerBuilder: (context, constraints, _) {
               return Padding(
