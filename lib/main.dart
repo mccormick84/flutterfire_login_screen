@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:login_screen/screen/home_screen.dart';
+import 'package:flutterfire_ui/auth.dart';
+import 'package:login_screen/const/client_id.dart';
 import 'auth_gate.dart';
 import 'firebase_options.dart';
 
@@ -10,6 +12,12 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  FlutterFireUIAuth.configureProviders([
+    const EmailProviderConfiguration(),
+    const GoogleProviderConfiguration(clientId: GOOGLE_CLIENT_ID),
+  ]);
+
   runApp(MyApp());
 }
 
@@ -18,6 +26,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final auth = FirebaseAuth.instance;
+
     return MaterialApp(
       home: AuthGate(),
     );
